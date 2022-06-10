@@ -27,10 +27,9 @@ services:
     ports:
       - "6379:6379"
       - "5432:5432"
+      - "1025:1025"
     volumes:
       - /app/cloud/drive_data:/var/lib/cloud/data
-        #    ports:
-        #- "1025:1025"
   cloud-frontend:
     image: "mderam/cloud-frontend:latest"
     restart: always
