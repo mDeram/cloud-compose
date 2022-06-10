@@ -24,6 +24,9 @@ services:
       - postgres
     expose:
       - "8000"
+    port:
+      - "6379:6379"
+      - "5432:5432"
     volumes:
       - /app/cloud/drive_data:/var/lib/cloud/data
         #    ports:
