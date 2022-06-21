@@ -27,8 +27,6 @@ services:
     ports:
       - "6379:6379"
       - "5432:5432"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     volumes:
       - /app/cloud/drive_data:/var/lib/cloud/data
   cloud-frontend:
