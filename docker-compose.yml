@@ -4,20 +4,22 @@ services:
     image: "redis:7-alpine"
     expose:
       - "6379"
+    volumes:
+      - redis_db:/data
   postgres:
     image: "postgres:14-alpine"
     env_file: /app/cloud/.env
     expose:
       - "5432"
     volumes:
-      - /app/cloud/postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
   cloud-backend:
     image: "mderam/cloud-backend:latest"
     restart: always
     env_file: /app/cloud/.env
     environment:
       - NODE_ENV=production
-      - DRIVE_PATH=/var/lib/cloud/data
+      - DRIVE_PATH=/home/node/data
       - PORT=8000
     depends_on:
       - redis
@@ -28,7 +30,7 @@ services:
       - "6379:6379"
       - "5432:5432"
     volumes:
-      - /app/cloud/drive_data:/var/lib/cloud/data
+      - drive_data:/home/node/data
   cloud-frontend:
     image: "mderam/cloud-frontend:latest"
     restart: always
@@ -50,4 +52,7 @@ services:
       - cloud-frontend
 
 volumes:
-  nginx_secrets:
+  nginx_secrets: {}
+  redis_db: {}
+  postgres_data: {}
+  drive_data: {}
